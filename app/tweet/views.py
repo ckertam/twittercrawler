@@ -48,6 +48,15 @@ class GetTweetsSimulationAPIView(APIView):
     def post(self,request,*args,**kwargs):
         username=request.data.get("username")
         since_date = request.data.get("since_date")
+        data = request.data.get("data")
+        df = pd.read_excel(data)
+        # tweet = df["tweet"].values.tolist()
+        payload = {
+            "username":username,
+            "since_date":since_date,
+            "tweets":df["tweet"].values.tolist()
+        }
+        sentiment_analysis = requests.post(url="http://127.0.0.1:5000/analyze/",json=(payload))
 
-        return Response("Sent.", status=200)
+        return Response(sentiment_analysis.json(), status=200)
 

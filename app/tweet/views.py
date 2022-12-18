@@ -56,7 +56,7 @@ class GetTweetsSimulationAPIView(APIView):
             "since_date":since_date,
             "tweets":df["tweet"].values.tolist()
         }
-        sentiment_analysis = requests.post(url="http://127.0.0.1:5000/analyze/",json=(payload))
+        sentiment_analysis = requests.post(url="http://34.27.20.191:8000/analyze/",json=(payload))
 
         return Response(sentiment_analysis.json(), status=200)
 

@@ -49,8 +49,7 @@ class GetTweetsSimulationAPIView(APIView):
         username=request.data.get("username")
         since_date = request.data.get("since_date")
         data = request.data.get("data")
-        file_path = os.path.abspath("TestExcel.xlsx")
-        df = pd.read_excel(file_path)
+        df = pd.read_excel("/TestExcel.xlsx")
         # tweet = df["tweet"].values.tolist()
         payload = {
             "username":username,

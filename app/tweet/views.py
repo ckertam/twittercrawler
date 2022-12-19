@@ -9,7 +9,7 @@ import numpy as np
 from datetime import datetime
 import inflect
 # from sklearn.cluster import KMeans
-
+import os
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -49,7 +49,8 @@ class GetTweetsSimulationAPIView(APIView):
         username=request.data.get("username")
         since_date = request.data.get("since_date")
         data = request.data.get("data")
-        df = pd.read_excel("./TestExcel.xlsx")
+        file_path = os.path.abspath("TestExcel.xlsx")
+        df = pd.read_excel(file_path)
         # tweet = df["tweet"].values.tolist()
         payload = {
             "username":username,

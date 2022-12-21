@@ -37,7 +37,7 @@ class GetTweetsAPIView(APIView):
         payload = {
             "username":username,
             "since_date":since_date,
-            "tweets":Tweets_df["tweet"].values.tolist()
+            "tweets":Tweets_df["tweet"].tolist()
         }
         print(payload)
         sentiment_analysis = requests.post(url="http://34.27.20.191:8000/analyze/",json=(payload))
@@ -57,7 +57,7 @@ class GetTweetsSimpleSimulationAPIView(APIView):
         payload = {
             "username":username,
             "since_date":since_date,
-            "tweets":df["tweet"].values.tolist()
+            "tweets":df["tweet"].tolist()
         }
         sentiment_analysis = requests.post(url="http://34.27.20.191:8000/analyze/",json=(payload))
 
@@ -75,7 +75,7 @@ class GetTweetsComplexSimulationAPIView(APIView):
         payload = {
             "username":username,
             "since_date":since_date,
-            "tweets":df["tweet"].values.tolist()
+            "tweets":df["tweet"].tolist()
         }
         sentiment_analysis = requests.post(url="http://34.27.20.191:8000/analyze/",json=(payload))
 

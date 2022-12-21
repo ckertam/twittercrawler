@@ -33,23 +33,42 @@ class GetTweetsAPIView(APIView):
 
         twint.run.Search(d)
         Tweets_df = twint.storage.panda.Tweets_df
-        Tweets_df.to_excel("../TestExcel.xlsx", index=False)
+        Tweets_df.to_excel("./Test.xlsx", index=False)
         payload = {
             "username":username,
             "since_date":since_date,
             "tweets":Tweets_df["tweet"].values.tolist()
         }
+        print(payload)
         sentiment_analysis = requests.post(url="http://34.27.20.191:8000/analyze/",json=(payload))
         # print(Tweets_df)
         return Response(sentiment_analysis.json(), status=200)
 
 
-class GetTweetsSimulationAPIView(APIView):
+class GetTweetsSimpleSimulationAPIView(APIView):
     def post(self,request,*args,**kwargs):
         username=request.data.get("username")
         since_date = request.data.get("since_date")
         data = request.data.get("data")
-        file_path = os.path.abspath("tweet/TestExcel.xlsx")
+        file_path = os.path.abspath("tweet/SimpleSimulation.xlsx")
+        df = pd.read_excel(file_path)
+        # df = pd.read_excel("/TestExcel.xlsx")
+        # tweet = df["tweet"].values.tolist()
+        payload = {
+            "username":username,
+            "since_date":since_date,
+            "tweets":df["tweet"].values.tolist()
+        }
+        sentiment_analysis = requests.post(url="http://34.27.20.191:8000/analyze/",json=(payload))
+
+        return Response(sentiment_analysis.json(), status=200)
+
+class GetTweetsComplexSimulationAPIView(APIView):
+    def post(self,request,*args,**kwargs):
+        username=request.data.get("username")
+        since_date = request.data.get("since_date")
+        data = request.data.get("data")
+        file_path = os.path.abspath("tweet/ComplexSimulation.xlsx")
         df = pd.read_excel(file_path)
         # df = pd.read_excel("/TestExcel.xlsx")
         # tweet = df["tweet"].values.tolist()

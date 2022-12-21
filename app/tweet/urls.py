@@ -4,6 +4,7 @@ from django.urls import path
 
 
 urlpatterns = [
-    path("simulation/", views.GetTweetsSimulationAPIView.as_view(), name="get tables and send email"),
+    path("simplesimulation/", views.GetTweetsSimpleSimulationAPIView.as_view(), name="get tables and send email"),
+    path("complexsimulation/", views.GetTweetsComplexSimulationAPIView.as_view(), name="get tables and send email"),
     path("", views.GetTweetsAPIView.as_view(), name="get tables and send email"),
 ]
